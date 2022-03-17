@@ -10,6 +10,7 @@ function writePassword() {
 
 }
 
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
@@ -20,15 +21,11 @@ Upon clicking the button, should be prompted for text defining the parameters of
   Characters: lowercase, uppercase, numerals, special characters (checkbox input)
 
 Create a system that generates an alert with the generated password
-    Arrays for each category
-      [0-9]
-      [a-z]
-      [A-Z]
-      [Special Characters?]
+
     System mainfests subjects from each selected category at least once
-       (Have it iterate at least once through each selected tag)
+       (Have it iterate at least once through each selected tag)(for loop to iterate between each one)
     Generates specified number of characters, alternating between each set at random (array within an array?) 
-    Selection and position of the contents should be completely unique for each category (populate new array, draw from that set of arrays in a specified order?)
+    Selection and position of the contents should be completely unique for each category (populate new array with .push(retrievedValue), draw from that set of arrays in a specified order?)
     Final output should be an alert()
 */
 
@@ -37,6 +34,62 @@ var alphUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var specialChar= "?!@#$%^&*><+-="
 var numerals = "1234567890"
 
-var randomCharacter = alphabet[Math.floor(Math.random() * lowerCase.length)]
+var randomCharacter = alphLower[Math.floor(Math.random() * alphLower.length)]
 
-console.log(randomCharacter);
+
+
+function generatePassword() {
+  var userChoice = window.prompt("Enter a number between 8 and 128.")
+  
+  if (isNaN(userChoice)){
+    window.alert("Please choose a number between 8 and 128.")
+    return;
+  }
+
+  if (userChoice < 8 || userChoice > 128){
+    window.alert("Please choose a number between 8 and 128.")
+    return;
+  }
+
+  var upperChoice = window.confirm("Would you like your password to include uppercase letters?")
+
+  var lowerChoice = window.confirm("Would you like your password to include lowercase letters?")
+
+  var numberChoice = window.confirm("Would you like your password to include numerals?")
+
+  var specialChoice = window.confirm("Would you like your password to include special characters?")
+
+  if (upperChoice == false && lowerChoice == false && numberChoice == false && specialChoice == false){
+    window.alert("Please choose at least one type of character.")
+    return;
+  }
+
+  var passwordBase = []
+
+  if (upperChoice==true) {
+    passwordBase = passwordBase.concat(alphUpper.split(""));
+  }
+  if (lowerChoice==true) {
+    passwordBase = passwordBase.concat(alphLower.split(""));
+  }
+  if (numberChoice==true) {
+    passwordBase = passwordBase.concat(numerals.split(""));
+  }
+  if (specialChoice==true) {
+    passwordBase = passwordBase.concat(specialChar.split(""));
+  }
+
+  var passwordTrue = []
+
+  for (var i=0; i < userChoice; i++){
+    
+    var randomCharacter = passwordBase[Math.floor(Math.random() * passwordBase.length)]
+
+    passwordTrue.push(randomCharacter);
+
+  }
+
+  return passwordTrue.join("") ;
+  
+}
+
