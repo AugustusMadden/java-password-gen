@@ -65,22 +65,25 @@ function generatePassword() {
   }
 
   var passwordBase = []
+  var passwordTrue = []
 
   if (upperChoice==true) {
     passwordBase = passwordBase.concat(alphUpper.split(""));
+    passwordTrue.push(alphUpper[Math.floor(Math.random() * alphUpper.length)]);
   }
   if (lowerChoice==true) {
     passwordBase = passwordBase.concat(alphLower.split(""));
+    passwordTrue.push(alphLower[Math.floor(Math.random() * alphLower.length)]);
   }
   if (numberChoice==true) {
     passwordBase = passwordBase.concat(numerals.split(""));
+    passwordTrue.push(numerals[Math.floor(Math.random() * numerals.length)]);
   }
   if (specialChoice==true) {
     passwordBase = passwordBase.concat(specialChar.split(""));
+    passwordTrue.push(specialChar[Math.floor(Math.random() * specialChar.length)]);
   }
-
-  var passwordTrue = []
-
+  
   for (var i=0; i < userChoice; i++){
     
     var randomCharacter = passwordBase[Math.floor(Math.random() * passwordBase.length)]
